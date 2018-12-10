@@ -77,6 +77,13 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
+		378341F621BEB0A50001137A /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		3785138821BE717600981C8D = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				378513A621BE717900981C8D /* Info.plist */,
+				378341F621BEB0A50001137A /* Fonts */,
 				378341F121BE8A510001137A /* Assets */,
 				378341F021BE8A420001137A /* Template */,
 				378341EF21BE8A380001137A /* Scenes */,

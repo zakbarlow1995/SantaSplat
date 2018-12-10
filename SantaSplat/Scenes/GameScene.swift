@@ -72,8 +72,8 @@ class GameScene: SKScene {
     }
     
     func setupScoreLabel() {
-        scoreLabel.fontName = "Futura-Medium"
-        scoreLabel.fontSize = 60.0
+        scoreLabel.fontName = "Menlo-Bold"
+        scoreLabel.fontSize = 70.0
         scoreLabel.fontColor = .white
         scoreLabel.position = CGPoint(x: frame.midX, y: frame.midY)
         scoreLabel.zPosition = ZPositions.label
