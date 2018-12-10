@@ -10,9 +10,28 @@ import SpriteKit
 
 class GameScene: SKScene {
     
+    var bucket: SKSpriteNode!
+    
     override func didMove(to view: SKView) {
+        layoutScene()
+    }
+    
+    func layoutScene() {
+        backgroundColor = UIColor(red: 44/255, green: 80/255, blue: 62/255, alpha: 1.0)
         
-        // Get label node from scene and store it for use later
+        bucket = SKSpriteNode(imageNamed: "bucket")
+        bucket.size = CGSize(width: frame.size.width/4, height: frame.size.width/4)
+        bucket.position = CGPoint(x: frame.midX, y: frame.minY + bucket.size.height)
+        addChild(bucket)
+        
+        spawnSanta()
+    }
+    
+    func spawnSanta() {
+        let santa = SKSpriteNode(imageNamed: "santa")
+        santa.size = CGSize(width: bucket.size.width/1.5, height: bucket.size.height/1.5)
+        santa.position = CGPoint(x: frame.midX, y: frame.maxY)
+        addChild(santa)
     }
     
     override func update(_ currentTime: TimeInterval) {
