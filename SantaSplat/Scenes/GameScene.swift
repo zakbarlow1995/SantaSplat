@@ -15,6 +15,7 @@ enum BucketState: Int {
 class GameScene: SKScene {
     
     var bucket: SKSpriteNode!
+    var deathWall: SKSpriteNode!
     var bucketState = BucketState.centre
     var currentSantaIndex: Int?
     
@@ -24,7 +25,7 @@ class GameScene: SKScene {
     }
     
     func setupPhysics() {
-        physicsWorld.gravity = CGVector(dx: 0.0, dy: -2.0)
+        physicsWorld.gravity = CGVector(dx: 0.0, dy: -5.0)
         physicsWorld.contactDelegate = self
     }
     
@@ -42,7 +43,24 @@ class GameScene: SKScene {
         bucket.physicsBody?.isDynamic = false
         
         addChild(bucket)
+        
+        setupDeathWall()
         spawnSanta()
+    }
+    
+    func setupDeathWall() {
+        deathWall = SKSpriteNode()
+        deathWall.color = .orange
+        deathWall.size = CGSize(width: frame.size.width, height: frame.size.width/4)
+        deathWall.position = CGPoint(x: frame.midX, y: frame.minY + bucket.size.height/4)
+        deathWall.name = "DeathWall"
+        
+        //Setup physics body
+        deathWall.physicsBody = SKPhysicsBody(rectangleOf: deathWall.size)
+        deathWall.physicsBody?.categoryBitMask = PhysicsCategories.deathCategory
+        deathWall.physicsBody?.isDynamic = false
+        
+        addChild(deathWall)
     }
     
     func spawnSanta() {
@@ -50,7 +68,7 @@ class GameScene: SKScene {
         
         let santa = SKSpriteNode(imageNamed: "santa")
         santa.size = CGSize(width: bucket.size.width/1.5, height: bucket.size.height/1.5)
-        santa.position = CGPoint(x: (1.0+CGFloat(currentSantaIndex!))/4.0*frame.maxX, y: frame.maxY)
+        santa.position = CGPoint(x: (1.0+CGFloat(currentSantaIndex!))/4.0*frame.maxX, y: frame.maxY + santa.size.height)
         santa.name = "Santa"
         
         //Setup physics body
@@ -67,7 +85,7 @@ class GameScene: SKScene {
     func moveBucketLeft() {
         if let newState = BucketState(rawValue: bucketState.rawValue - 1) {
             bucketState = newState
-            bucket.run(SKAction.moveBy(x: -frame.maxX/4.0, y: 0, duration: 0.05))
+            bucket.run(SKAction.moveBy(x: -frame.maxX/4.0, y: 0, duration: 0.08))
         }
         print(bucketState.rawValue)
     }
@@ -75,9 +93,13 @@ class GameScene: SKScene {
     func moveBucketRight() {
         if let newState = BucketState(rawValue: bucketState.rawValue + 1) {
             bucketState = newState
-            bucket.run(SKAction.moveBy(x: frame.maxX/4.0, y: 0, duration: 0.05))
+            bucket.run(SKAction.moveBy(x: frame.maxX/4.0, y: 0, duration: 0.08))
         }
         print(bucketState.rawValue)
+    }
+    
+    func gameOver() {
+        print("Game Over!!")
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -107,6 +129,17 @@ extension GameScene: SKPhysicsContactDelegate {
         // Usually use a switch statement
         if contactMask == PhysicsCategories.santaCategory | PhysicsCategories.bucketCategory {
             print("Contact!!")
+            
+            if let santa = contact.bodyA.node?.name == "Santa" ? contact.bodyA.node as? SKSpriteNode : contact.bodyB.node as? SKSpriteNode {
+                santa.run(SKAction.fadeOut(withDuration: 0.05)) {
+                    santa.removeFromParent()
+                    self.spawnSanta()
+                }
+            } else {
+                gameOver()
+            }
+        } else {
+            print("Ohh shit!!")
         }
     }
 }
