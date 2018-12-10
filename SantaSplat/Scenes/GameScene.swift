@@ -15,6 +15,8 @@ enum BucketState: Int {
 class GameScene: SKScene {
     
     var bucket: SKSpriteNode!
+    var bucketState = BucketState.centre
+    var currentSantaIndex: Int?
     
     override func didMove(to view: SKView) {
         setupPhysics()
@@ -32,6 +34,7 @@ class GameScene: SKScene {
         bucket = SKSpriteNode(imageNamed: "bucket")
         bucket.size = CGSize(width: frame.size.width/4, height: frame.size.width/4)
         bucket.position = CGPoint(x: frame.midX, y: frame.minY + bucket.size.height)
+        bucket.name = "Bucket"
         
         //Setup physics body
         bucket.physicsBody = SKPhysicsBody(rectangleOf: bucket.size)
@@ -43,9 +46,12 @@ class GameScene: SKScene {
     }
     
     func spawnSanta() {
+        currentSantaIndex = Int.random(in: 0...2)
+        
         let santa = SKSpriteNode(imageNamed: "santa")
         santa.size = CGSize(width: bucket.size.width/1.5, height: bucket.size.height/1.5)
-        santa.position = CGPoint(x: frame.midX, y: frame.maxY)
+        santa.position = CGPoint(x: (1.0+CGFloat(currentSantaIndex!))/4.0*frame.maxX, y: frame.maxY)
+        santa.name = "Santa"
         
         //Setup physics body
         santa.physicsBody = SKPhysicsBody(rectangleOf: santa.size)
@@ -56,6 +62,30 @@ class GameScene: SKScene {
         santa.physicsBody?.collisionBitMask = PhysicsCategories.none
         
         addChild(santa)
+    }
+    
+    func moveBucketLeft() {
+        if bucketState != .left {
+            
+        }
+    }
+    
+    func moveBucketRight() {
+        if bucketState != .right {
+            
+        }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let location = touches.first!.location(in: self)
+        
+        if location.x < frame.midX {
+            print("Go left!")
+            moveBucketLeft()
+        } else if location.x > frame.midX {
+            print("Go right!")
+            moveBucketRight()
+        }
     }
     
     override func update(_ currentTime: TimeInterval) {
