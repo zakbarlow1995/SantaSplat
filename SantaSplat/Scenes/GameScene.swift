@@ -32,6 +32,12 @@ class GameScene: SKScene {
     func layoutScene() {
         backgroundColor = UIColor(red: 44/255, green: 80/255, blue: 62/255, alpha: 1.0)
         
+        setupBucket()
+        setupDeathWall()
+        spawnSanta()
+    }
+    
+    func setupBucket() {
         bucket = SKSpriteNode(imageNamed: "bucket")
         bucket.size = CGSize(width: frame.size.width/4, height: frame.size.width/4)
         bucket.position = CGPoint(x: frame.midX, y: frame.minY + bucket.size.height)
@@ -43,9 +49,6 @@ class GameScene: SKScene {
         bucket.physicsBody?.isDynamic = false
         
         addChild(bucket)
-        
-        setupDeathWall()
-        spawnSanta()
     }
     
     func setupDeathWall() {
@@ -76,7 +79,7 @@ class GameScene: SKScene {
         santa.physicsBody?.categoryBitMask = PhysicsCategories.santaCategory
         
         //Setup contact & collision test bit masks
-        santa.physicsBody?.contactTestBitMask = PhysicsCategories.bucketCategory
+        santa.physicsBody?.contactTestBitMask = PhysicsCategories.bucketCategory | PhysicsCategories.deathCategory
         santa.physicsBody?.collisionBitMask = PhysicsCategories.none
         
         addChild(santa)
@@ -140,6 +143,7 @@ extension GameScene: SKPhysicsContactDelegate {
             }
         } else {
             print("Ohh shit!!")
+            gameOver()
         }
     }
 }
