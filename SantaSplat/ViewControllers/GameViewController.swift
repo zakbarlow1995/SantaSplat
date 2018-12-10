@@ -23,7 +23,8 @@ class GameViewController: UIViewController {
             // Present the scene
             view.presentScene(scene)
             
-            view.ignoresSiblingOrder = true
+            //Commented out because we want to specify z-order manually
+            //view.ignoresSiblingOrder = true
             
             view.showsFPS = true
             view.showsNodeCount = true

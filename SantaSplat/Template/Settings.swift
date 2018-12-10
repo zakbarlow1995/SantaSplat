@@ -15,3 +15,9 @@ enum PhysicsCategories {
     static let bucketCategory: UInt32 = 0x1 << 1 // Bitwise shift: 010
     static let deathCategory: UInt32 = 0x1 << 2  //              : 100
 }
+
+enum ZPositions {
+    static let label: CGFloat = 0
+    static let bucket: CGFloat = 1
+    static let santa: CGFloat = 2
+}

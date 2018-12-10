@@ -45,6 +45,7 @@ class GameScene: SKScene {
         bucket = SKSpriteNode(imageNamed: "bucket")
         bucket.size = CGSize(width: frame.size.width/4, height: frame.size.width/4)
         bucket.position = CGPoint(x: frame.midX, y: frame.minY + bucket.size.height)
+        bucket.zPosition = ZPositions.bucket
         bucket.name = "Bucket"
         
         //Setup physics body
@@ -71,10 +72,11 @@ class GameScene: SKScene {
     }
     
     func setupScoreLabel() {
-        scoreLabel.fontName = "Courier"
+        scoreLabel.fontName = "Futura-Medium"
         scoreLabel.fontSize = 60.0
         scoreLabel.fontColor = .white
         scoreLabel.position = CGPoint(x: frame.midX, y: frame.midY)
+        scoreLabel.zPosition = ZPositions.label
         addChild(scoreLabel)
     }
     
@@ -88,6 +90,7 @@ class GameScene: SKScene {
         let santa = SKSpriteNode(imageNamed: "santa")
         santa.size = CGSize(width: bucket.size.width/1.5, height: bucket.size.height/1.5)
         santa.position = CGPoint(x: (1.0+CGFloat(currentSantaIndex!))/4.0*frame.maxX, y: frame.maxY + santa.size.height)
+        santa.zPosition = ZPositions.santa
         santa.name = "Santa"
         
         //Setup physics body
