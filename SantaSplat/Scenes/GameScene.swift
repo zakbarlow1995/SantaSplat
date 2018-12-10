@@ -157,7 +157,8 @@ extension GameScene: SKPhysicsContactDelegate {
         // Usually use a switch statement
         if contactMask == PhysicsCategories.santaCategory | PhysicsCategories.bucketCategory {
             if let santa = contact.bodyA.node?.name == "Santa" ? contact.bodyA.node as? SKSpriteNode : contact.bodyB.node as? SKSpriteNode {
-                
+                //run(SoundService.sharedInstance.splashSound)
+                run(SKAction.playSoundFileNamed("splash.mp3", waitForCompletion: false))
                 score += 1
                 updateScoreLabel()
                 
@@ -170,6 +171,7 @@ extension GameScene: SKPhysicsContactDelegate {
             }
         } else {
             if let santa = contact.bodyA.node?.name == "Santa" ? contact.bodyA.node as? SKSpriteNode : contact.bodyB.node as? SKSpriteNode {
+                run(SoundService.sharedInstance.splatSound)
                 
                 santa.run(SKAction.fadeOut(withDuration: 0.01)) {
                     santa.removeFromParent()

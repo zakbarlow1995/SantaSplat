@@ -6,18 +6,13 @@
 //  Copyright © 2018 zakbarlow. All rights reserved.
 //
 
-import Foundation
 import AudioToolbox
+import SpriteKit
 
 class SoundService {
     
     public static let sharedInstance = SoundService()
     
-    public let splatSound: Sound
-    public let splashSound: Sound
-    
-    init() {
-        splashSound = Sound(name: "splash", type: "mp3")
-        splatSound = Sound(name: "splat", type: "mp3")
-    }
+    public let splatSound = SKAction.playSoundFileNamed("splat", waitForCompletion: false)
+    public let splashSound = SKAction.playSoundFileNamed("splash", waitForCompletion: false)
 }
