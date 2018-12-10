@@ -37,6 +37,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		378341EE21BE8A150001137A /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				3785139C21BE717600981C8D /* GameViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		378341EF21BE8A380001137A /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				3785139A21BE717600981C8D /* GameScene.swift */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		378341F021BE8A420001137A /* Template */ = {
+			isa = PBXGroup;
+			children = (
+				3785139421BE717600981C8D /* AppDelegate.swift */,
+			);
+			path = Template;
+			sourceTree = "<group>";
+		};
+		378341F121BE8A510001137A /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				3785139E21BE717600981C8D /* Main.storyboard */,
+				378513A121BE717900981C8D /* Assets.xcassets */,
+				378513A321BE717900981C8D /* LaunchScreen.storyboard */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
 		3785138821BE717600981C8D = {
 			isa = PBXGroup;
 			children = (
@@ -56,13 +90,11 @@
 		3785139321BE717600981C8D /* SantaSplat */ = {
 			isa = PBXGroup;
 			children = (
-				3785139421BE717600981C8D /* AppDelegate.swift */,
-				3785139A21BE717600981C8D /* GameScene.swift */,
-				3785139C21BE717600981C8D /* GameViewController.swift */,
-				3785139E21BE717600981C8D /* Main.storyboard */,
-				378513A121BE717900981C8D /* Assets.xcassets */,
-				378513A321BE717900981C8D /* LaunchScreen.storyboard */,
 				378513A621BE717900981C8D /* Info.plist */,
+				378341F121BE8A510001137A /* Assets */,
+				378341F021BE8A420001137A /* Template */,
+				378341EF21BE8A380001137A /* Scenes */,
+				378341EE21BE8A150001137A /* ViewControllers */,
 			);
 			path = SantaSplat;
 			sourceTree = "<group>";
@@ -289,6 +321,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JU94JLHKNT;
 				INFOPLIST_FILE = SantaSplat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -307,6 +340,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JU94JLHKNT;
 				INFOPLIST_FILE = SantaSplat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
