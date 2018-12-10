@@ -19,6 +19,9 @@ class GameScene: SKScene {
     var bucketState = BucketState.centre
     var currentSantaIndex: Int?
     
+    let scoreLabel = SKLabelNode(text: "0")
+    var score = 0
+    
     override func didMove(to view: SKView) {
         setupPhysics()
         layoutScene()
@@ -34,6 +37,7 @@ class GameScene: SKScene {
         
         setupBucket()
         setupDeathWall()
+        setupScoreLabel()
         spawnSanta()
     }
     
@@ -64,6 +68,18 @@ class GameScene: SKScene {
         deathWall.physicsBody?.isDynamic = false
         
         addChild(deathWall)
+    }
+    
+    func setupScoreLabel() {
+        scoreLabel.fontName = "Courier"
+        scoreLabel.fontSize = 60.0
+        scoreLabel.fontColor = .white
+        scoreLabel.position = CGPoint(x: frame.midX, y: frame.midY)
+        addChild(scoreLabel)
+    }
+    
+    func updateScoreLabel() {
+        scoreLabel.text = "\(score)"
     }
     
     func spawnSanta() {
@@ -131,9 +147,12 @@ extension GameScene: SKPhysicsContactDelegate {
         
         // Usually use a switch statement
         if contactMask == PhysicsCategories.santaCategory | PhysicsCategories.bucketCategory {
-            print("Contact!!")
             
             if let santa = contact.bodyA.node?.name == "Santa" ? contact.bodyA.node as? SKSpriteNode : contact.bodyB.node as? SKSpriteNode {
+                
+                score += 1
+                updateScoreLabel()
+                
                 santa.run(SKAction.fadeOut(withDuration: 0.05)) {
                     santa.removeFromParent()
                     self.spawnSanta()
