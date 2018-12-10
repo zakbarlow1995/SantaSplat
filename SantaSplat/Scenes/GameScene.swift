@@ -65,25 +65,29 @@ class GameScene: SKScene {
     }
     
     func moveBucketLeft() {
-        if bucketState != .left {
-            
+        if let newState = BucketState(rawValue: bucketState.rawValue - 1) {
+            bucketState = newState
+            bucket.run(SKAction.moveBy(x: -frame.maxX/4.0, y: 0, duration: 0.05))
         }
+        print(bucketState.rawValue)
     }
     
     func moveBucketRight() {
-        if bucketState != .right {
-            
+        if let newState = BucketState(rawValue: bucketState.rawValue + 1) {
+            bucketState = newState
+            bucket.run(SKAction.moveBy(x: frame.maxX/4.0, y: 0, duration: 0.05))
         }
+        print(bucketState.rawValue)
     }
-    
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let location = touches.first!.location(in: self)
         
         if location.x < frame.midX {
-            print("Go left!")
+            print("\tGo left!")
             moveBucketLeft()
         } else if location.x > frame.midX {
-            print("Go right!")
+            print("\tGo right!")
             moveBucketRight()
         }
     }
