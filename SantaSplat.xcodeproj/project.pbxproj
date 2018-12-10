@@ -15,6 +15,7 @@
 		3783420521BEC5690001137A /* splash.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3783420321BEC5690001137A /* splash.wav */; };
 		3783420821BECEE90001137A /* Splash.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3783420621BECEE90001137A /* Splash.sks */; };
 		3783420921BECEE90001137A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3783420721BECEE90001137A /* Assets.xcassets */; };
+		3783420B21BED26C0001137A /* Splat.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3783420A21BED26B0001137A /* Splat.sks */; };
 		3785139521BE717600981C8D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3785139421BE717600981C8D /* AppDelegate.swift */; };
 		3785139B21BE717600981C8D /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3785139A21BE717600981C8D /* GameScene.swift */; };
 		3785139D21BE717600981C8D /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3785139C21BE717600981C8D /* GameViewController.swift */; };
@@ -32,6 +33,7 @@
 		3783420321BEC5690001137A /* splash.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = splash.wav; path = SantaSplat/splash.wav; sourceTree = SOURCE_ROOT; };
 		3783420621BECEE90001137A /* Splash.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Splash.sks; sourceTree = "<group>"; };
 		3783420721BECEE90001137A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3783420A21BED26B0001137A /* Splat.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Splat.sks; sourceTree = "<group>"; };
 		3785139121BE717600981C8D /* SantaSplat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SantaSplat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3785139421BE717600981C8D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3785139A21BE717600981C8D /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				378341EE21BE8A150001137A /* ViewControllers */,
 				378341FD21BEC0820001137A /* Models */,
 				3783420621BECEE90001137A /* Splash.sks */,
+				3783420A21BED26B0001137A /* Splat.sks */,
 				3783420721BECEE90001137A /* Assets.xcassets */,
 			);
 			path = SantaSplat;
@@ -201,6 +204,7 @@
 				3783420421BEC5690001137A /* splat.wav in Resources */,
 				378513A221BE717900981C8D /* Assets.xcassets in Resources */,
 				378513A521BE717900981C8D /* LaunchScreen.storyboard in Resources */,
+				3783420B21BED26C0001137A /* Splat.sks in Resources */,
 				3783420921BECEE90001137A /* Assets.xcassets in Resources */,
 				3783420821BECEE90001137A /* Splash.sks in Resources */,
 				3783420521BEC5690001137A /* splash.wav in Resources */,

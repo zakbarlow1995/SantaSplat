@@ -20,4 +20,10 @@ enum ZPositions {
     static let label: CGFloat = 0
     static let bucket: CGFloat = 1
     static let santa: CGFloat = 2
+    static let emitter: CGFloat = 3
+}
+
+struct Emitter {
+    static let splash = "Splash"
+    static let splat = "Splat"
 }
