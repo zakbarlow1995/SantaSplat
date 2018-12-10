@@ -12,12 +12,6 @@ class MenuScene: SKScene {
     
     override func didMove(to view: SKView) {
         backgroundColor = UIColor(red: 44/255, green: 80/255, blue: 62/255, alpha: 1.0)
-        
-        for family in UIFont.familyNames.sorted() {
-            let names = UIFont.fontNames(forFamilyName: family)
-            print("Family: \(family) Font names: \(names)")
-        }
-        
         addLogo()
         addLabels()
     }
@@ -32,11 +26,11 @@ class MenuScene: SKScene {
     func addLabels() {
         let playLabel = SKLabelNode(text: "Tap to play!")
         playLabel.fontName = "Menlo-Bold"
-        playLabel.fontSize = 50.0
+        playLabel.fontSize = 45.0
         playLabel.fontColor = .white
         playLabel.position = CGPoint(x: frame.midX, y: frame.midY)
         addChild(playLabel)
-        
+        animate(label: playLabel)
         
         let highscoreLabel = SKLabelNode(text: "Highscore: \(UserDefaults.standard.integer(forKey: "HighScore"))")
         highscoreLabel.fontName = "Menlo-Bold"
@@ -51,6 +45,19 @@ class MenuScene: SKScene {
         recentScoreLabel.fontColor = .white
         recentScoreLabel.position = CGPoint(x: frame.midX, y: highscoreLabel.position.y - recentScoreLabel.frame.size.height*2)
         addChild(recentScoreLabel)
+    }
+    
+    func animate(label: SKLabelNode) {
+        let fadeOut = SKAction.fadeOut(withDuration: 0.8)
+        let fadeIn = SKAction.fadeIn(withDuration: 0.8)
+        
+        let scaleUp = SKAction.scale(to: 1.05, duration: 0.8)
+        let scaleDown = SKAction.scale(to: 1.0, duration: 0.8)
+        
+        let sequenceOne = SKAction.sequence([fadeOut, fadeIn])
+        let sequenceTwo = SKAction.sequence([scaleDown, scaleUp])
+        label.run(SKAction.repeatForever(sequenceOne))
+        label.run(SKAction.repeatForever(sequenceTwo))
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

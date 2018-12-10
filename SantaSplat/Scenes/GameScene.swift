@@ -163,6 +163,8 @@ extension GameScene: SKPhysicsContactDelegate {
                 
                 santa.run(SKAction.fadeOut(withDuration: 0.05)) {
                     santa.removeFromParent()
+                    //self.run(SKAction.playSoundFileNamed("splash.mp3", waitForCompletion: false))
+                    //SoundService.sharedInstance.splashSound.play()
                     self.spawnSanta()
                 }
             }
@@ -171,6 +173,8 @@ extension GameScene: SKPhysicsContactDelegate {
                 
                 santa.run(SKAction.fadeOut(withDuration: 0.01)) {
                     santa.removeFromParent()
+                    //self.run(SKAction.playSoundFileNamed("splat.mp3", waitForCompletion: true))
+                    //SoundService.sharedInstance.splatSound.play()
                     self.gameOver()
                 }
             }
