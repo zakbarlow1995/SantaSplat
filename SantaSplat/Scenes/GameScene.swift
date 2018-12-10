@@ -89,7 +89,7 @@ class GameScene: SKScene {
     
     func setupDeathWall() {
         deathWall = SKSpriteNode()
-        deathWall.color = .orange
+        //deathWall.color = .orange
         deathWall.size = CGSize(width: frame.size.width, height: frame.size.width/4)
         deathWall.position = CGPoint(x: frame.midX, y: frame.minY + bucket.size.height/4)
         deathWall.name = "DeathWall"
@@ -157,8 +157,11 @@ class GameScene: SKScene {
             UserDefaults.standard.set(score, forKey: "HighScore")
         }
         
-        let menuScene = MenuScene(size: view!.bounds.size)
-        view!.presentScene(menuScene)
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+            // Put your code which should be executed with a delay here
+            let menuScene = MenuScene(size: self.view!.bounds.size)
+            self.view!.presentScene(menuScene)
+        })
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -220,14 +223,22 @@ extension GameScene: SKPhysicsContactDelegate {
     
     func splash(on santa: SKSpriteNode) {
         let emitter = SKEmitterNode(fileNamed: Emitter.splash)!
-        emitter.position = santa.position
+        var santaPosition = santa.position
+        
+        santaPosition.y -= santa.size.height
+        
+        emitter.position = santaPosition
         emitter.zPosition = ZPositions.emitter
         addChild(emitter)
     }
     
     func splat(on santa: SKSpriteNode) {
         let emitter = SKEmitterNode(fileNamed: Emitter.splat)!
-        emitter.position = santa.position
+        var santaPosition = santa.position
+        
+        santaPosition.y -= santa.size.height/2.0
+        
+        emitter.position = santaPosition
         emitter.zPosition = ZPositions.emitter
         addChild(emitter)
     }
