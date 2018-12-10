@@ -121,7 +121,13 @@ class GameScene: SKScene {
     }
     
     func gameOver() {
-        print("Game Over!!")
+        UserDefaults.standard.set(score, forKey: "RecentScore")
+        if score > UserDefaults.standard.integer(forKey: "HighScore") {
+            UserDefaults.standard.set(score, forKey: "HighScore")
+        }
+        
+        let menuScene = MenuScene(size: view!.bounds.size)
+        view!.presentScene(menuScene)
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -150,7 +156,6 @@ extension GameScene: SKPhysicsContactDelegate {
         
         // Usually use a switch statement
         if contactMask == PhysicsCategories.santaCategory | PhysicsCategories.bucketCategory {
-            
             if let santa = contact.bodyA.node?.name == "Santa" ? contact.bodyA.node as? SKSpriteNode : contact.bodyB.node as? SKSpriteNode {
                 
                 score += 1
@@ -160,12 +165,15 @@ extension GameScene: SKPhysicsContactDelegate {
                     santa.removeFromParent()
                     self.spawnSanta()
                 }
-            } else {
-                gameOver()
             }
         } else {
-            print("Ohh shit!!")
-            gameOver()
+            if let santa = contact.bodyA.node?.name == "Santa" ? contact.bodyA.node as? SKSpriteNode : contact.bodyB.node as? SKSpriteNode {
+                
+                santa.run(SKAction.fadeOut(withDuration: 0.01)) {
+                    santa.removeFromParent()
+                    self.gameOver()
+                }
+            }
         }
     }
 }
