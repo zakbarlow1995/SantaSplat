@@ -26,8 +26,8 @@
 		378341F421BEAE910001137A /* MenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 		378341FE21BEC09B0001137A /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
 		3783420021BEC0FD0001137A /* SoundService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundService.swift; sourceTree = "<group>"; };
-		3783420221BEC5690001137A /* splat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = splat.wav; sourceTree = "<group>"; };
-		3783420321BEC5690001137A /* splash.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = splash.wav; sourceTree = "<group>"; };
+		3783420221BEC5690001137A /* splat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = splat.wav; path = SantaSplat/splat.wav; sourceTree = SOURCE_ROOT; };
+		3783420321BEC5690001137A /* splash.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = splash.wav; path = SantaSplat/splash.wav; sourceTree = SOURCE_ROOT; };
 		3785139121BE717600981C8D /* SantaSplat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SantaSplat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3785139421BE717600981C8D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3785139A21BE717600981C8D /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };

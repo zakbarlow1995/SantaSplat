@@ -158,13 +158,13 @@ extension GameScene: SKPhysicsContactDelegate {
         if contactMask == PhysicsCategories.santaCategory | PhysicsCategories.bucketCategory {
             if let santa = contact.bodyA.node?.name == "Santa" ? contact.bodyA.node as? SKSpriteNode : contact.bodyB.node as? SKSpriteNode {
                 //run(SoundService.sharedInstance.splashSound)
-                run(SKAction.playSoundFileNamed("splash.mp3", waitForCompletion: false))
+                run(SKAction.playSoundFileNamed("splash.wav", waitForCompletion: false))
                 score += 1
                 updateScoreLabel()
                 
                 santa.run(SKAction.fadeOut(withDuration: 0.05)) {
                     santa.removeFromParent()
-                    //self.run(SKAction.playSoundFileNamed("splash.mp3", waitForCompletion: false))
+                    //self.run(SKAction.playSoundFileNamed("splash.wav", waitForCompletion: false))
                     //SoundService.sharedInstance.splashSound.play()
                     self.spawnSanta()
                 }
@@ -175,7 +175,7 @@ extension GameScene: SKPhysicsContactDelegate {
                 
                 santa.run(SKAction.fadeOut(withDuration: 0.01)) {
                     santa.removeFromParent()
-                    //self.run(SKAction.playSoundFileNamed("splat.mp3", waitForCompletion: true))
+                    //self.run(SKAction.playSoundFileNamed("splat.wav", waitForCompletion: true))
                     //SoundService.sharedInstance.splatSound.play()
                     self.gameOver()
                 }
