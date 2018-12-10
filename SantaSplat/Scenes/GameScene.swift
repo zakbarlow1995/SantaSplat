@@ -7,6 +7,7 @@
 //
 
 import SpriteKit
+import AVFoundation
 
 enum BucketState: Int {
     case left, centre, right
@@ -21,6 +22,36 @@ class GameScene: SKScene {
     
     let scoreLabel = SKLabelNode(text: "0")
     var score = 0
+    
+    var splashPlayer: AVAudioPlayer = {
+        guard let path = Bundle.main.path(forResource: "splash", ofType: "wav") else {
+            return AVAudioPlayer()
+        }
+        let url = URL(fileURLWithPath: path)
+        
+        guard let audioPlayer = try? AVAudioPlayer(contentsOf: url, fileTypeHint: nil) else {
+            return AVAudioPlayer()
+        }
+        
+        audioPlayer.prepareToPlay()
+        
+        return audioPlayer
+    }()
+    
+    var splatPlayer: AVAudioPlayer = {
+        guard let path = Bundle.main.path(forResource: "splat", ofType: "wav") else {
+            return AVAudioPlayer()
+        }
+        let url = URL(fileURLWithPath: path)
+        
+        guard let audioPlayer = try? AVAudioPlayer(contentsOf: url, fileTypeHint: nil) else {
+            return AVAudioPlayer()
+        }
+        
+        audioPlayer.prepareToPlay()
+        
+        return audioPlayer
+    }()
     
     override func didMove(to view: SKView) {
         setupPhysics()
@@ -158,7 +189,8 @@ extension GameScene: SKPhysicsContactDelegate {
         if contactMask == PhysicsCategories.santaCategory | PhysicsCategories.bucketCategory {
             if let santa = contact.bodyA.node?.name == "Santa" ? contact.bodyA.node as? SKSpriteNode : contact.bodyB.node as? SKSpriteNode {
                 //run(SoundService.sharedInstance.splashSound)
-                run(SKAction.playSoundFileNamed("splash.wav", waitForCompletion: false))
+                //run(SKAction.playSoundFileNamed("splash.wav", waitForCompletion: false))
+                splashPlayer.play()
                 score += 1
                 updateScoreLabel()
                 
@@ -171,8 +203,8 @@ extension GameScene: SKPhysicsContactDelegate {
             }
         } else {
             if let santa = contact.bodyA.node?.name == "Santa" ? contact.bodyA.node as? SKSpriteNode : contact.bodyB.node as? SKSpriteNode {
-                run(SoundService.sharedInstance.splatSound)
-                
+                //run(SoundService.sharedInstance.splatSound)
+                splatPlayer.play()
                 santa.run(SKAction.fadeOut(withDuration: 0.01)) {
                     santa.removeFromParent()
                     //self.run(SKAction.playSoundFileNamed("splat.wav", waitForCompletion: true))
