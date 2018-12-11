@@ -12,6 +12,7 @@ class MenuScene: SKScene {
     
     override func didMove(to view: SKView) {
         backgroundColor = UIColor(red: 44/255, green: 80/255, blue: 62/255, alpha: 1.0)
+//        SoundService.sharedInstance.coinPlayer.prepareToPlay()
         addLogo()
         addLabels()
     }
@@ -61,6 +62,8 @@ class MenuScene: SKScene {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        //SoundService.sharedInstance.splashPlayer.prepareToPlay()
+        SoundService.sharedInstance.coinPlayer.play()
         let gameScene = GameScene(size: view!.bounds.size)
         view!.presentScene(gameScene)
     }
