@@ -14,6 +14,16 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(resetSKView), name: .resetSKViewNotificaton, object: nil)
+        
+        presentView()
+    }
+    
+    @objc func resetSKView(){
+        presentView()
+    }
+    
+    func presentView() {
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
             let scene = MenuScene(size: view.bounds.size)
@@ -31,5 +41,11 @@ class GameViewController: UIViewController {
             view.showsFPS = true
             view.showsNodeCount = true
         }
+    }
+}
+
+extension Notification.Name {
+    static var resetSKViewNotificaton: Notification.Name {
+        return .init(rawValue: "resetSKViewNotificaton")
     }
 }

@@ -27,6 +27,7 @@ class GameScene: SKScene {
     var isGameOver = false
     
     override func didMove(to view: SKView) {
+        isGameOver = false
 //        SoundService.sharedInstance.splashPlayer.prepareToPlay()
 //        SoundService.sharedInstance.splatPlayer.prepareToPlay()
         setupPhysics()
@@ -166,8 +167,10 @@ class GameScene: SKScene {
             }
         }
         
-        let menuScene = MenuScene(size: view!.bounds.size)// ?? UIScreen.screens[0].bounds.size)
-        self.view!.presentScene(menuScene)
+        NotificationCenter.default.post(name: .resetSKViewNotificaton, object: self)
+        
+//        let menuScene = MenuScene(size: view!.bounds.size)// ?? UIScreen.screens[0].bounds.size)
+//        self.view!.presentScene(menuScene)
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -197,8 +200,10 @@ extension GameScene: SKPhysicsContactDelegate {
         // Usually use a switch statement
         if contactMask == PhysicsCategories.santaCategory | PhysicsCategories.bucketCategory {
             if let santa = contact.bodyA.node?.name == "Santa" ? contact.bodyA.node as? SKSpriteNode : contact.bodyB.node as? SKSpriteNode {
-
-                score += 1
+                
+                if !isGameOver {
+                    score += 1
+                }
                 updateScoreLabel()
                 run(SKAction.playSoundFileNamed("splash", waitForCompletion: false))
                 //SoundService.sharedInstance.splashPlayer.play()
@@ -211,7 +216,7 @@ extension GameScene: SKPhysicsContactDelegate {
             }
         } else {
             if let santa = contact.bodyA.node?.name == "Santa" ? contact.bodyA.node as? SKSpriteNode : contact.bodyB.node as? SKSpriteNode {
-                //gameTimer = Timer()
+                isGameOver = true
                 run(SKAction.playSoundFileNamed("splat", waitForCompletion: false))
                 //SoundService.sharedInstance.splatPlayer.play()
                 splat(on: santa)
