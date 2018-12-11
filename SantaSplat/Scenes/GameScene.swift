@@ -23,36 +23,6 @@ class GameScene: SKScene {
     let scoreLabel = SKLabelNode(text: "0")
     var score = 0
     
-//    var splashPlayer: AVAudioPlayer = {
-//        guard let path = Bundle.main.path(forResource: "splash", ofType: "wav") else {
-//            return AVAudioPlayer()
-//        }
-//        let url = URL(fileURLWithPath: path)
-//
-//        guard let audioPlayer = try? AVAudioPlayer(contentsOf: url, fileTypeHint: nil) else {
-//            return AVAudioPlayer()
-//        }
-//
-//        audioPlayer.prepareToPlay()
-//
-//        return audioPlayer
-//    }()
-//
-//    var splatPlayer: AVAudioPlayer = {
-//        guard let path = Bundle.main.path(forResource: "splat", ofType: "wav") else {
-//            return AVAudioPlayer()
-//        }
-//        let url = URL(fileURLWithPath: path)
-//
-//        guard let audioPlayer = try? AVAudioPlayer(contentsOf: url, fileTypeHint: nil) else {
-//            return AVAudioPlayer()
-//        }
-//
-//        audioPlayer.prepareToPlay()
-//
-//        return audioPlayer
-//    }()
-    
     override func didMove(to view: SKView) {
 //        SoundService.sharedInstance.splashPlayer.prepareToPlay()
 //        SoundService.sharedInstance.splatPlayer.prepareToPlay()
@@ -91,7 +61,7 @@ class GameScene: SKScene {
     
     func setupDeathWall() {
         deathWall = SKSpriteNode()
-        //deathWall.color = .orange
+        //deathWall.color = UIColor(red: 40/255, green: 72/255, blue: 56/255, alpha: 1.0)//.orange
         deathWall.size = CGSize(width: frame.size.width, height: frame.size.width/4)
         deathWall.position = CGPoint(x: frame.midX, y: frame.minY + bucket.size.height/4)
         deathWall.name = "DeathWall"
@@ -173,10 +143,10 @@ class GameScene: SKScene {
         let location = touches.first!.location(in: self)
         
         if location.x < frame.midX {
-            print("\tGo left!")
+            run(SKAction.playSoundFileNamed("whoosh", waitForCompletion: false))
             moveBucketLeft()
         } else if location.x > frame.midX {
-            print("\tGo right!")
+            run(SKAction.playSoundFileNamed("whoosh", waitForCompletion: false))
             moveBucketRight()
         }
     }
@@ -199,28 +169,22 @@ extension GameScene: SKPhysicsContactDelegate {
 
                 score += 1
                 updateScoreLabel()
-                
-                SoundService.sharedInstance.splashPlayer.play()
+                run(SKAction.playSoundFileNamed("splash", waitForCompletion: false))
+                //SoundService.sharedInstance.splashPlayer.play()
                 splash(on: santa)
                 
                 santa.run(SKAction.fadeOut(withDuration: 0.05)) {
                     santa.removeFromParent()
-                    //self.run(SKAction.playSoundFileNamed("splash.wav", waitForCompletion: false))
-                    //SoundService.sharedInstance.splashSound.play()
-                    
-                    //SoundService.sharedInstance.splashPlayer.stop()
-                    //SoundService.sharedInstance.splashPlayer.currentTime = 0
-                    
                     self.spawnSanta()
                 }
             }
         } else {
             if let santa = contact.bodyA.node?.name == "Santa" ? contact.bodyA.node as? SKSpriteNode : contact.bodyB.node as? SKSpriteNode {
-                SoundService.sharedInstance.splatPlayer.play()
+                run(SKAction.playSoundFileNamed("splat", waitForCompletion: false))
+                //SoundService.sharedInstance.splatPlayer.play()
                 splat(on: santa)
                 santa.run(SKAction.fadeOut(withDuration: 0.01)) {
                     santa.removeFromParent()
-                    
                     self.gameOver()
                 }
             }
