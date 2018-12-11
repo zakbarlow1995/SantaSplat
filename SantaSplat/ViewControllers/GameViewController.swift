@@ -38,8 +38,8 @@ class GameViewController: UIViewController {
             //Commented out because we want to specify z-order manually
             view.ignoresSiblingOrder = true
             
-            view.showsFPS = true
-            view.showsNodeCount = true
+            //view.showsFPS = true
+            //view.showsNodeCount = true
         }
     }
 }

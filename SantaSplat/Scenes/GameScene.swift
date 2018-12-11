@@ -69,7 +69,7 @@ class GameScene: SKScene {
         deathWall = SKSpriteNode()
         //deathWall.color = UIColor(red: 40/255, green: 72/255, blue: 56/255, alpha: 1.0)//.orange
         deathWall.size = CGSize(width: frame.size.width, height: frame.size.width/4)
-        deathWall.position = CGPoint(x: frame.midX, y: frame.minY + bucket.size.height/4)
+        deathWall.position = CGPoint(x: frame.midX, y: frame.minY + bucket.size.height/3)
         deathWall.name = "DeathWall"
         
         //Setup physics body
@@ -243,7 +243,7 @@ extension GameScene: SKPhysicsContactDelegate {
         let emitter = SKEmitterNode(fileNamed: Emitter.splat)!
         var santaPosition = santa.position
         
-        santaPosition.y -= santa.size.height/2.0
+        santaPosition.y -= santa.size.height/1.5
         
         emitter.position = santaPosition
         emitter.zPosition = ZPositions.emitter
