@@ -154,6 +154,8 @@ class GameScene: SKScene {
     }
     
     @objc func transitionBackToMenu() {
+        self.removeAllChildren()
+        
         // Removing Specific Children
         for child in self.children {
             
