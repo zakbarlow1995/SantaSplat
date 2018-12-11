@@ -23,11 +23,16 @@ class GameScene: SKScene {
     let scoreLabel = SKLabelNode(text: "0")
     var score = 0
     
+    var gameTimer = Timer()
+    var isGameOver = false
+    
     override func didMove(to view: SKView) {
 //        SoundService.sharedInstance.splashPlayer.prepareToPlay()
 //        SoundService.sharedInstance.splatPlayer.prepareToPlay()
         setupPhysics()
         layoutScene()
+        
+        gameTimer = Timer.scheduledTimer(timeInterval: 3.0*Double.pi, target: self, selector:#selector(self.tick) , userInfo: nil, repeats: true)
     }
     
     func setupPhysics() {
@@ -127,16 +132,40 @@ class GameScene: SKScene {
     }
     
     func gameOver() {
+        isGameOver = true
         UserDefaults.standard.set(score, forKey: "RecentScore")
         if score > UserDefaults.standard.integer(forKey: "HighScore") {
             UserDefaults.standard.set(score, forKey: "HighScore")
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
-            // Put your code which should be executed with a delay here
-            let menuScene = MenuScene(size: self.view!.bounds.size)
-            self.view!.presentScene(menuScene)
-        })
+        gameTimer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector:#selector(self.transitionBackToMenu) , userInfo: nil, repeats: false)
+        
+//        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+//            // Put your code which should be executed with a delay here
+//            let menuScene = MenuScene(size: self.view!.bounds.size)
+//            self.view!.presentScene(menuScene)
+//        })
+    }
+    
+    @objc func tick() {
+        if !isGameOver {
+            self.spawnSanta()
+        }
+    }
+    
+    @objc func transitionBackToMenu() {
+        // Removing Specific Children
+        for child in self.children {
+            
+            //Determine Details
+            if child.name == "Santa" {
+                print("removed santa")
+                child.removeFromParent()
+            }
+        }
+        
+        let menuScene = MenuScene(size: view!.bounds.size)// ?? UIScreen.screens[0].bounds.size)
+        self.view!.presentScene(menuScene)
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -180,6 +209,7 @@ extension GameScene: SKPhysicsContactDelegate {
             }
         } else {
             if let santa = contact.bodyA.node?.name == "Santa" ? contact.bodyA.node as? SKSpriteNode : contact.bodyB.node as? SKSpriteNode {
+                //gameTimer = Timer()
                 run(SKAction.playSoundFileNamed("splat", waitForCompletion: false))
                 //SoundService.sharedInstance.splatPlayer.play()
                 splat(on: santa)
