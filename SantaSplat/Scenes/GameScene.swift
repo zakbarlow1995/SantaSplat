@@ -23,6 +23,9 @@ class GameScene: SKScene {
     let scoreLabel = SKLabelNode(text: "0")
     var score = 0
     
+    var tickCount: Int = 100
+    var spawnRate = 100
+    
     var gameTimer = Timer()
     var isGameOver = false
     
@@ -33,7 +36,7 @@ class GameScene: SKScene {
         setupPhysics()
         layoutScene()
         
-        gameTimer = Timer.scheduledTimer(timeInterval: 3.0*Double.pi, target: self, selector:#selector(self.tick) , userInfo: nil, repeats: true)
+        gameTimer = Timer.scheduledTimer(timeInterval: 0.02, target: self, selector:#selector(self.tick) , userInfo: nil, repeats: true)
     }
     
     func setupPhysics() {
@@ -150,7 +153,17 @@ class GameScene: SKScene {
     
     @objc func tick() {
         if !isGameOver {
-            self.spawnSanta()
+            print(tickCount)
+            if (tickCount == 0) {
+                self.spawnSanta()
+                if self.spawnRate <= 15 {
+                    spawnRate = 14 + Int.random(in: 0...6)
+                } else {
+                    self.spawnRate = spawnRate - 2 // Change this to determine how quickly the spawn rate increases
+                }
+                self.tickCount=self.spawnRate
+            }
+            self.tickCount -= 1
         }
     }
     
@@ -227,7 +240,7 @@ extension GameScene: SKPhysicsContactDelegate {
                 
                 santa.run(SKAction.fadeOut(withDuration: 0.05)) {
                     santa.removeFromParent()
-                    self.spawnSanta()
+                    //self.spawnSanta()
                 }
             }
         } else {
