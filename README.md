@@ -1,6 +1,6 @@
 # SantaSplat
 
-A fun Christmas iOS game for all of your work colleagues to enjoy at the office party. 
+A fun iOS game for all of your colleagues to enjoy at the office Christmas party. 
 
 Don't let Santa splat! Buckets included.
 
