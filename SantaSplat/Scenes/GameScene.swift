@@ -176,12 +176,28 @@ class GameScene: SKScene {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let location = touches.first!.location(in: self)
         
-        if location.x < frame.midX {
+//        if location.x < frame.midX {
+//            run(SKAction.playSoundFileNamed("whoosh", waitForCompletion: false))
+//            moveBucketLeft()
+//        } else if location.x > frame.midX {
+//            run(SKAction.playSoundFileNamed("whoosh", waitForCompletion: false))
+//            moveBucketRight()
+//        }
+        
+        if location.x <= frame.maxX/3.0 {
+            moveBucketTo(.left)
+        } else if location.x > frame.maxX/3 && location.x <= frame.maxX*2.0/3.0 {
+            moveBucketTo(.centre)
+        } else if location.x > frame.maxX*2.0/3.0 {
+            moveBucketTo(.right)
+        }
+    }
+    
+    func moveBucketTo(_ newBucketState: BucketState) {
+        if bucketState != newBucketState {
             run(SKAction.playSoundFileNamed("whoosh", waitForCompletion: false))
-            moveBucketLeft()
-        } else if location.x > frame.midX {
-            run(SKAction.playSoundFileNamed("whoosh", waitForCompletion: false))
-            moveBucketRight()
+            bucketState = newBucketState
+            bucket.run(SKAction.moveTo(x: (1.0+CGFloat(bucketState.rawValue))/4.0*frame.maxX, duration: 0.08))
         }
     }
     
