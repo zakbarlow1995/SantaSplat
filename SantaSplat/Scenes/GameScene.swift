@@ -70,7 +70,7 @@ class GameScene: SKScene {
     
     func setupDeathWall() {
         deathWall = SKSpriteNode()
-        deathWall.color = UIColor(red: 40/255, green: 72/255, blue: 56/255, alpha: 1.0)//.orange
+        //deathWall.color = UIColor(red: 40/255, green: 72/255, blue: 56/255, alpha: 1.0)//.orange
         if UIScreen.main.bounds.width == 320 {
             deathWall.size = CGSize(width: frame.size.width, height: frame.size.width/8)
             deathWall.position = CGPoint(x: frame.midX, y: frame.minY)
