@@ -27,7 +27,11 @@ class MenuScene: SKScene {
     func addLabels() {
         let playLabel = SKLabelNode(text: "Tap to play!")
         playLabel.fontName = "Menlo-Bold"
-        playLabel.fontSize = 45.0
+        if UIScreen.main.bounds.width == 320 {
+            playLabel.fontSize = 40.0
+        } else {
+            playLabel.fontSize = 45.0
+        }
         playLabel.fontColor = .white
         playLabel.position = CGPoint(x: frame.midX, y: frame.midY)
         addChild(playLabel)
@@ -35,14 +39,22 @@ class MenuScene: SKScene {
         
         let highscoreLabel = SKLabelNode(text: "Highscore: \(UserDefaults.standard.integer(forKey: "HighScore"))")
         highscoreLabel.fontName = "Menlo-Bold"
-        highscoreLabel.fontSize = 35.0
+        if UIScreen.main.bounds.width == 320 {
+            playLabel.fontSize = 20.0
+        } else {
+            playLabel.fontSize = 35.0
+        }
         highscoreLabel.fontColor = .white
         highscoreLabel.position = CGPoint(x: frame.midX, y: frame.midY - highscoreLabel.frame.size.height*3)
         addChild(highscoreLabel)
         
         let recentScoreLabel = SKLabelNode(text: "Recent Score: \(UserDefaults.standard.integer(forKey: "RecentScore"))")
         recentScoreLabel.fontName = "Menlo-Bold"
-        recentScoreLabel.fontSize = 35.0
+        if UIScreen.main.bounds.width == 320 {
+            playLabel.fontSize = 20.0
+        } else {
+            playLabel.fontSize = 35.0
+        }
         recentScoreLabel.fontColor = .white
         recentScoreLabel.position = CGPoint(x: frame.midX, y: highscoreLabel.position.y - recentScoreLabel.frame.size.height*2)
         addChild(recentScoreLabel)
